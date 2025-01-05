@@ -1,0 +1,21 @@
+FROM golang:1.20.14
+LABEL authors="wxl"
+EXPOSE 8888
+
+# 设置工作目录
+WORKDIR /miner_core
+
+# 复制 go.mod 和 go.sum 文件
+COPY go.mod go.sum ./
+
+# 下载依赖
+RUN go mod download
+
+# 复制项目文件
+COPY . .
+
+# 编译 Go 代码
+RUN sh build.sh
+
+# 设置容器启动时运行的命令
+CMD ["sh ./script/bootstrap.sh"]
