@@ -18,4 +18,4 @@ COPY . .
 RUN sh build.sh
 
 # 设置容器启动时运行的命令
-CMD ["sh output/bootstrap.sh"]
+CMD ["sh", "output/bootstrap.sh"]
