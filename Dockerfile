@@ -17,11 +17,5 @@ COPY . .
 # 编译 Go 代码
 RUN sh build.sh
 
-# 调试信息：列出 output 目录内容
-RUN ls -l output
-
-# 调试信息：列出目录内容
-RUN ls -l /miner_core
-
 # 设置容器启动时运行的命令
-CMD ["sh", "output/bootstrap.sh"]
+CMD ["sh", "/miner_core/output/bootstrap.sh"]
