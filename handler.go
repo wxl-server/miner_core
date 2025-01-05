@@ -10,6 +10,12 @@ type ItemServiceImpl struct{}
 
 // GetItem implements the ItemServiceImpl interface.
 func (s *ItemServiceImpl) GetItem(ctx context.Context, req *miner_core.GetItemReq) (resp *miner_core.GetItemResp, err error) {
-	// TODO: Your code here...
-	return
+	return &miner_core.GetItemResp{
+		Item: &miner_core.Item{
+			Id:    1,
+			Title: "test",
+			Stock: "100",
+		},
+		BaseResp: nil,
+	}, nil
 }
