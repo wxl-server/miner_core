@@ -1,4 +1,4 @@
-FROM golang:1.20.14
+FROM golang:1.20.14-alpine
 LABEL authors="wxl"
 EXPOSE 8888
 
@@ -18,4 +18,4 @@ COPY . .
 RUN sh build.sh
 
 # 设置容器启动时运行的命令
-CMD ["sh ./script/bootstrap.sh"]
+CMD ["sh output/bootstrap.sh"]
