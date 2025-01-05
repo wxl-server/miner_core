@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/bytedance/gopkg/util/logger"
 	miner_core "github.com/qcq1/rpc_miner_core/kitex_gen/miner_core"
 )
 
@@ -10,6 +11,7 @@ type ItemServiceImpl struct{}
 
 // GetItem implements the ItemServiceImpl interface.
 func (s *ItemServiceImpl) GetItem(ctx context.Context, req *miner_core.GetItemReq) (resp *miner_core.GetItemResp, err error) {
+	logger.CtxInfof(ctx, "GetItem called, req: %v", req)
 	return &miner_core.GetItemResp{
 		Item: &miner_core.Item{
 			Id:    1,
