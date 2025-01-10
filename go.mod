@@ -4,11 +4,13 @@ go 1.20
 
 replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 
-require github.com/qcq1/rpc_miner_core v0.0.0-20250104123121-bc276a4d3136
+require (
+	github.com/bytedance/gopkg v0.1.1
+	github.com/qcq1/rpc_miner_core v0.0.0-20250104124443-1b9e06e8b95b
+)
 
 require (
 	github.com/apache/thrift v0.16.0 // indirect
-	github.com/bytedance/gopkg v0.1.1 // indirect
 	github.com/bytedance/sonic v1.12.5 // indirect
 	github.com/bytedance/sonic/loader v0.2.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect

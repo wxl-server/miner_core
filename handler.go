@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	"github.com/bytedance/gopkg/util/logger"
 	miner_core "github.com/qcq1/rpc_miner_core/kitex_gen/miner_core"
 )
@@ -16,7 +17,7 @@ func (s *ItemServiceImpl) GetItem(ctx context.Context, req *miner_core.GetItemRe
 		Item: &miner_core.Item{
 			Id:    1,
 			Title: "test",
-			Stock: "100",
+			Stock: 100,
 		},
 		BaseResp: nil,
 	}, nil
