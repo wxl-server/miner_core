@@ -16,8 +16,9 @@ type LocalConfigStruct struct {
 }
 
 type ServerConfig struct {
-	Name string `yaml:"name"`
-	Port string `yaml:"port"`
+	Name     string `yaml:"name"`
+	HostPort string `yaml:"host_port"`
+	Network  string `yaml:"network"`
 }
 
 type NacosConfig struct {
