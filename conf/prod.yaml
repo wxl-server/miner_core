@@ -1,6 +1,5 @@
 Server:
   Name: "miner_core"
-  Network: "tcp"
 Nacos:
   Host: "wxl475.cn"
   Port: 31311
