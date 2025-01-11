@@ -1,6 +1,6 @@
 Server:
   Name: "miner_core"
-  HostPort: "127.0.0.1:8888"
+  HostPort: ":8888"
   Network: "tcp"
 Nacos:
   Host: "wxl475.cn"

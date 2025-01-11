@@ -1,11 +1,11 @@
 Server:
   Name: "miner_core"
-  HostPort: "127.0.0.1:8889"
+  HostPort: ":8889"
   Network: "tcp"
 Nacos:
   Host: "wxl475.cn"
   Port: 31311
   GrpcPort: 32201
-  Namespace: "boe"
+  Namespace: "public"
   Username: "nacos"
   Password: "wxl5211314"
