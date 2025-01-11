@@ -12,22 +12,12 @@ var Config = &LocalConfigStruct{}
 
 type LocalConfigStruct struct {
 	Server ServerConfig `yaml:"server"`
-	Nacos  NacosConfig  `yaml:"nacos"`
 }
 
 type ServerConfig struct {
 	Name     string `yaml:"name"`
 	HostPort string `yaml:"host_port"`
 	Network  string `yaml:"network"`
-}
-
-type NacosConfig struct {
-	Host      string `yaml:"host"`
-	Port      uint64 `yaml:"port"`
-	GrpcPort  uint64 `yaml:"grpc_port"`
-	Namespace string `yaml:"namespace"`
-	Username  string `yaml:"username"`
-	Password  string `yaml:"password"`
 }
 
 func InitLocalConfig(ctx context.Context, configPath string, envStr env.Env) {

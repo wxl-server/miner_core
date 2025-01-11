@@ -1,9 +1,2 @@
 Server:
   Name: "miner_core"
-Nacos:
-  Host: "wxl475.cn"
-  Port: 31311
-  GrpcPort: 32201
-  Namespace: "public"
-  Username: "nacos"
-  Password: "wxl5211314"
