@@ -11,7 +11,13 @@ import (
 var Config = &LocalConfigStruct{}
 
 type LocalConfigStruct struct {
-	Nacos NacosConfig `yaml:"nacos"`
+	Server ServerConfig `yaml:"server"`
+	Nacos  NacosConfig  `yaml:"nacos"`
+}
+
+type ServerConfig struct {
+	Name string `yaml:"name"`
+	Port string `yaml:"port"`
 }
 
 type NacosConfig struct {

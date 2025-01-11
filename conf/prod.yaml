@@ -1,7 +1,10 @@
+Server:
+  Name: "miner_core"
+  Port: "8888"
 Nacos:
-  Host: "nacos.basic-service.svc.cluster.local"
-  Port: 8848
-  GrpcPort: 9849
+  Host: "wxl475.cn"
+  Port: 31311
+  GrpcPort: 32201
   Namespace: "public"
   Username: "nacos"
   Password: "wxl5211314"

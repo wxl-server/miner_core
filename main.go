@@ -13,15 +13,18 @@ import (
 	"github.com/qcq1/common/env"
 	miner_core "github.com/qcq1/rpc_miner_core/kitex_gen/miner_core/itemservice"
 	"miner_core/sal/config"
+	"net"
 )
 
 func main() {
 	ctx := context.Background()
 	Init(ctx)
 
+	addr, _ := net.ResolveTCPAddr("tcp", "127.0.0.1:"+config.Config.Server.Port)
 	svr := miner_core.NewServer(
 		new(ItemServiceImpl),
-		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "miner_core"}),
+		server.WithServiceAddr(addr),
+		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: config.Config.Server.Name}),
 		server.WithRegistry(registry.NewNacosRegistry(InitNacosClient(ctx))),
 	)
 	if err := svr.Run(); err != nil {

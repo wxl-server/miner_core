@@ -1,3 +1,6 @@
+Server:
+  Name: "miner_core"
+  Port: "8889"
 Nacos:
   Host: "wxl475.cn"
   Port: 31311
