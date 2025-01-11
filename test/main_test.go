@@ -2,6 +2,7 @@ package test
 
 import (
 	"context"
+	"github.com/qcq1/common/env"
 	"miner_core/sal/config"
 	"testing"
 )
@@ -12,5 +13,5 @@ func TestMain(m *testing.M) {
 }
 
 func Init(ctx context.Context) {
-	config.InitLocalConfig(ctx, "../conf/prod.yaml")
+	config.InitLocalConfig(ctx, "../conf/", env.GetEnv())
 }

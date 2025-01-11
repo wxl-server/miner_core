@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"github.com/bytedance/gopkg/util/logger"
+	"github.com/qcq1/common/env"
 	"github.com/qcq1/common/json"
 	"github.com/spf13/viper"
 )
@@ -15,13 +16,16 @@ type LocalConfigStruct struct {
 
 type NacosConfig struct {
 	Host      string `yaml:"host"`
-	Port      int    `yaml:"port"`
+	Port      uint64 `yaml:"port"`
+	GrpcPort  uint64 `yaml:"grpc_port"`
 	Namespace string `yaml:"namespace"`
+	Username  string `yaml:"username"`
+	Password  string `yaml:"password"`
 }
 
-func InitLocalConfig(ctx context.Context, configPath string) {
+func InitLocalConfig(ctx context.Context, configPath string, envStr env.Env) {
 	vip := viper.New()
-	vip.SetConfigFile(configPath)
+	vip.SetConfigFile(configPath + envStr + ".yaml")
 	err := vip.ReadInConfig()
 	if err != nil {
 		logger.CtxErrorf(ctx, "[Init] init local config failed, err = %v", err)

@@ -1,0 +1,7 @@
+Nacos:
+  Host: "wxl475.cn"
+  Port: 31311
+  GrpcPort: 32201
+  Namespace: "boe"
+  Username: "nacos"
+  Password: "wxl5211314"
