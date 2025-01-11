@@ -3,8 +3,8 @@ package config
 import (
 	"context"
 	"github.com/bytedance/gopkg/util/logger"
+	"github.com/luci/go-render/render"
 	"github.com/qcq1/common/env"
-	"github.com/qcq1/common/json"
 	"github.com/spf13/viper"
 )
 
@@ -33,5 +33,5 @@ func InitLocalConfig(ctx context.Context, configPath string, envStr env.Env) {
 		logger.CtxErrorf(ctx, "[Init] unmarshal config failed, err = %v", err)
 		panic(err)
 	}
-	logger.CtxInfof(ctx, "[Init] init local config success, config = %v", json.MarshalWithoutError[string](Config))
+	logger.CtxInfof(ctx, "[Init] init local config success, config = %v", render.Render(Config))
 }
