@@ -1,0 +1,4 @@
+Nacos:
+  Host: "nacos.basic-service.svc.cluster.local"
+  Port: 8848
+  Namespace: "public"
