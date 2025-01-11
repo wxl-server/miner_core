@@ -8,10 +8,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-var Config = &LocalConfigStruct{}
-
-type LocalConfigStruct struct {
+type AppConfig struct {
 	Server ServerConfig `yaml:"server"`
+	Mysql  MysqlConfig  `yaml:"mysql"`
 }
 
 type ServerConfig struct {
@@ -20,18 +19,24 @@ type ServerConfig struct {
 	Network  string `yaml:"network"`
 }
 
-func InitLocalConfig(ctx context.Context, configPath string, envStr env.Env) {
+type MysqlConfig struct {
+	Dsn string `yaml:"dsn"`
+}
+
+func InitAppConfig(ctx context.Context) *AppConfig {
 	vip := viper.New()
-	vip.SetConfigFile(configPath + envStr + ".yaml")
+	vip.SetConfigFile("conf/" + env.GetEnv() + ".yaml")
 	err := vip.ReadInConfig()
 	if err != nil {
 		logger.CtxErrorf(ctx, "[Init] init local config failed, err = %v", err)
 		panic(err)
 	}
+	Config := &AppConfig{}
 	err = vip.Unmarshal(Config)
 	if err != nil {
 		logger.CtxErrorf(ctx, "[Init] unmarshal config failed, err = %v", err)
 		panic(err)
 	}
 	logger.CtxInfof(ctx, "[Init] init local config success, config = %v", render.Render(Config))
+	return Config
 }

@@ -3,37 +3,78 @@ package main
 import (
 	"context"
 	"github.com/bytedance/gopkg/util/logger"
-	"github.com/cloudwego/kitex/server"
-	"github.com/qcq1/common/env"
-	miner_core "github.com/qcq1/rpc_miner_core/kitex_gen/miner_core/itemservice"
+	"github.com/qcq1/common/render"
+	"go.uber.org/dig"
+	"miner_core/app"
 	"miner_core/sal/config"
-	"net"
+	"miner_core/sal/dao"
+	"miner_core/sal/id_generator"
+	"miner_core/service"
+)
+
+var (
+	initCtx   = context.Background()
+	container = dig.New()
 )
 
 func main() {
-	ctx := context.Background()
-	Init(ctx)
-	RunServer(ctx)
+	initContainer()
+
+	mustInvoke(runServer)
 }
 
-func Init(ctx context.Context) {
-	config.InitLocalConfig(ctx, "conf/", env.GetEnv())
-}
-
-func RunServer(ctx context.Context) {
-	options := make([]server.Option, 0)
-	if env.IsBoe() {
-		serverConfig := config.Config.Server
-		addr, err := net.ResolveTCPAddr(serverConfig.Network, serverConfig.HostPort)
-		if err != nil {
-			logger.CtxErrorf(ctx, "[Init] resolve tcp addr failed, err = %v", err)
-			panic(err)
-		}
-		options = append(options, server.WithServiceAddr(addr))
+func initContainer() {
+	// context
+	{
+		mustProvide(func() context.Context { return initCtx })
 	}
-	svr := miner_core.NewServer(new(ItemServiceImpl), options...)
-	if err := svr.Run(); err != nil {
-		logger.CtxErrorf(ctx, "[Init] server run failed, err = %v", err)
+
+	// config
+	{
+		mustProvide(config.InitAppConfig)
+	}
+
+	// db
+	{
+		mustInvoke(dao.InitDB)
+	}
+
+	// id generator
+	{
+		mustProvide(id_generator.InitIDGenerator)
+	}
+
+	// dal
+	{
+		mustProvide(dao.NewJobDal)
+	}
+
+	// service
+	{
+		mustProvide(service.NewJobService)
+	}
+
+	// app
+	{
+		mustProvide(app.NewApp)
+	}
+
+	// handler
+	{
+		mustProvide(NewHandler)
+	}
+}
+
+func mustProvide(constructor interface{}, opts ...dig.ProvideOption) {
+	if err := container.Provide(constructor); err != nil {
+		logger.Errorf("container provide failed, err = %v, constructor = %v", err, render.Render(constructor))
+		panic(err)
+	}
+}
+
+func mustInvoke(function interface{}, opts ...dig.InvokeOption) {
+	if err := container.Invoke(function); err != nil {
+		logger.Errorf("container invoke failed, err = %v, function = %v", err, render.Render(function))
 		panic(err)
 	}
 }
