@@ -25,18 +25,24 @@ func Init(ctx context.Context) {
 
 func RunServer(ctx context.Context) {
 	serverConfig := config.Config.Server
-	addr, err := net.ResolveTCPAddr(serverConfig.Network, serverConfig.HostPort)
-	if err != nil {
-		logger.CtxErrorf(ctx, "[Init] resolve tcp addr failed, err = %v", err)
-		panic(err)
+	options := make([]server.Option, 0)
+	if env.IsBoe() {
+		addr, err := net.ResolveTCPAddr(serverConfig.Network, serverConfig.HostPort)
+		if err != nil {
+			logger.CtxErrorf(ctx, "[Init] resolve tcp addr failed, err = %v", err)
+			panic(err)
+		}
+		options = append(options, server.WithServiceAddr(addr))
 	}
-	svr := miner_core.NewServer(
-		new(ItemServiceImpl),
-		server.WithServiceAddr(addr),
+	options = append(options, []server.Option{
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: serverConfig.Name}),
 		server.WithRegistry(registry.NewNacosRegistry(nacos.Register2Nacos(ctx))),
+	}...)
+	svr := miner_core.NewServer(
+		new(ItemServiceImpl),
+		options...,
 	)
-	if err = svr.Run(); err != nil {
+	if err := svr.Run(); err != nil {
 		logger.CtxErrorf(ctx, "[Init] server run failed, err = %v", err)
 		panic(err)
 	}
