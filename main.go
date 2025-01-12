@@ -6,6 +6,7 @@ import (
 	"github.com/qcq1/common/render"
 	"go.uber.org/dig"
 	"miner_core/app"
+	"miner_core/repo"
 	"miner_core/sal/config"
 	"miner_core/sal/dao"
 	"miner_core/sal/id_generator"
@@ -47,6 +48,11 @@ func initContainer() {
 	// dal
 	{
 		mustProvide(dao.NewJobDal)
+	}
+
+	// repo
+	{
+		mustProvide(repo.NewJobRepo)
 	}
 
 	// service

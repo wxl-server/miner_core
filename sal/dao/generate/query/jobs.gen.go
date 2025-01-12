@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"miner_core/sal/dao/generate/model"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -15,8 +16,6 @@ import (
 	"gorm.io/gen/field"
 
 	"gorm.io/plugin/dbresolver"
-
-	"miner_core/sal/dao/model"
 )
 
 func newJobPO(db *gorm.DB, opts ...gen.DOOption) jobPO {

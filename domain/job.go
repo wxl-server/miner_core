@@ -16,7 +16,7 @@ type JobDO struct {
 	UpdatedAt   time.Time
 }
 
-type QueryJobListReq struct {
+type QueryJobListReqDO struct {
 	PageNum  int64
 	PageSize int64
 	OrderBy  *string

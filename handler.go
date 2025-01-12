@@ -3,8 +3,11 @@ package main
 import (
 	"context"
 	"github.com/bytedance/gopkg/util/logger"
+	"github.com/cloudwego/kitex/pkg/endpoint"
+	"github.com/cloudwego/kitex/pkg/utils"
 	"github.com/cloudwego/kitex/server"
 	"github.com/qcq1/common/env"
+	"github.com/qcq1/common/render"
 	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core"
 	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core/minercore"
 	"miner_core/app"
@@ -16,7 +19,7 @@ type Handler struct {
 	app *app.App
 }
 
-func NewHandler(app *app.App) *Handler {
+func NewHandler(app *app.App) miner_core.MinerCore {
 	return &Handler{
 		app: app,
 	}
@@ -26,8 +29,9 @@ func (s *Handler) QueryJobList(ctx context.Context, req *miner_core.QueryJobList
 	return s.app.P.JobService.QueryJobList(ctx, req)
 }
 
-func runServer(ctx context.Context, config *config.AppConfig, handler *Handler) {
+func runServer(ctx context.Context, config *config.AppConfig, handler miner_core.MinerCore) {
 	options := make([]server.Option, 0)
+	options = append(options, server.WithMiddleware(LogMiddleware))
 	if env.IsBoe() {
 		serverConfig := config.Server
 		addr, err := net.ResolveTCPAddr(serverConfig.Network, serverConfig.HostPort)
@@ -41,5 +45,22 @@ func runServer(ctx context.Context, config *config.AppConfig, handler *Handler) 
 	if err := svr.Run(); err != nil {
 		logger.CtxErrorf(ctx, "[Init] server run failed, err = %v", err)
 		panic(err)
+	}
+}
+
+func LogMiddleware(next endpoint.Endpoint) endpoint.Endpoint {
+	return func(ctx context.Context, request, response interface{}) error {
+		if arg, ok := request.(utils.KitexArgs); ok {
+			if req := arg.GetFirstArgument(); req != nil {
+				logger.CtxInfof(ctx, "Get request = %v", render.Render(req))
+			}
+		}
+		err := next(ctx, request, response)
+		if result, ok := response.(utils.KitexResult); ok {
+			if resp := result.GetResult(); resp != nil {
+				logger.CtxInfof(ctx, "Send response = %v", render.Render(resp))
+			}
+		}
+		return err
 	}
 }

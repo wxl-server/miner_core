@@ -3,20 +3,21 @@ package repo
 import (
 	"context"
 	"github.com/bytedance/gopkg/util/logger"
+	"go.uber.org/dig"
 	"miner_core/domain"
 	"miner_core/domain/converter"
 	"miner_core/sal/dao"
-	"miner_core/sal/dao/query"
 )
 
 type JobRepo interface {
-	QueryJobList(ctx context.Context, req *domain.QueryJobListReq) ([]domain.JobDO, error)
+	QueryJobList(ctx context.Context, req *domain.QueryJobListReqDO) ([]domain.JobDO, error)
 }
 
 type JobRepoImpl struct {
 	p Param
 }
 type Param struct {
+	dig.In
 	JobDal dao.JobDal
 }
 
@@ -26,8 +27,8 @@ func NewJobRepo(p Param) JobRepo {
 	}
 }
 
-func (i JobRepoImpl) QueryJobList(ctx context.Context, req *domain.QueryJobListReq) ([]domain.JobDO, error) {
-	jobList, err := i.p.JobDal.QueryJobList(ctx, query.BuildQueryJobListCondition(ctx, req))
+func (i JobRepoImpl) QueryJobList(ctx context.Context, req *domain.QueryJobListReqDO) ([]domain.JobDO, error) {
+	jobList, err := i.p.JobDal.QueryJobList(ctx, converter.BuildJobWhereOpt(req))
 	if err != nil {
 		logger.CtxErrorf(ctx, "i.p.JobDal.QueryJobList failed, err = %v", err)
 		return nil, err

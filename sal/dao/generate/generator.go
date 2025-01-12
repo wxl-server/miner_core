@@ -4,7 +4,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gen"
 	"gorm.io/gorm"
-	"miner_core/sal/dao/model"
+	"miner_core/sal/dao/generate/model"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 func modelGenerator() {
 	g := gen.NewGenerator(gen.Config{
 		FieldNullable: true,
-		OutPath:       "./sal/dao/model",
+		OutPath:       "./sal/dao/generator/model",
 		Mode:          gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
 	})
 
@@ -30,7 +30,7 @@ func modelGenerator() {
 func queryGenerator() {
 	g := gen.NewGenerator(gen.Config{
 		FieldNullable: true,
-		OutPath:       "./sal/dao/query",
+		OutPath:       "./sal/dao/generator/query",
 		Mode:          gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
 	})
 
