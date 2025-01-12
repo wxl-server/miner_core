@@ -6,7 +6,7 @@ import (
 	"miner_core/domain"
 	"miner_core/domain/converter"
 	"miner_core/sal/dao"
-	"miner_core/sal/dao/model"
+	"miner_core/sal/dao/query"
 )
 
 type JobRepo interface {
@@ -27,7 +27,7 @@ func NewJobRepo(p Param) JobRepo {
 }
 
 func (i JobRepoImpl) QueryJobList(ctx context.Context, req *domain.QueryJobListReq) ([]domain.JobDO, error) {
-	jobList, err := i.p.JobDal.QueryJobList(ctx, model.BuildQueryJobListCondition(ctx, req))
+	jobList, err := i.p.JobDal.QueryJobList(ctx, query.BuildQueryJobListCondition(ctx, req))
 	if err != nil {
 		logger.CtxErrorf(ctx, "i.p.JobDal.QueryJobList failed, err = %v", err)
 		return nil, err

@@ -1,4 +1,4 @@
-package model
+package query
 
 import (
 	"context"
@@ -6,11 +6,10 @@ import (
 	"github.com/qcq1/common/gptr"
 	"miner_core/common/constants"
 	"miner_core/domain"
-	"miner_core/sal/dao/query"
 )
 
-func BuildQueryJobListCondition(ctx context.Context, req *domain.QueryJobListReq) (condition query.IJobPODo) {
-	jobPO := query.Q.JobPO
+func BuildQueryJobListCondition(ctx context.Context, req *domain.QueryJobListReq) (condition IJobPODo) {
+	jobPO := Q.JobPO
 	condition = jobPO.Limit(int(req.PageSize))
 	condition = condition.Offset(int(req.PageSize * req.PageNum))
 	if req.OrderBy != nil {

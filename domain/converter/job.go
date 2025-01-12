@@ -41,7 +41,7 @@ func JobDO2DTO(do domain.JobDO) *miner_core.Job {
 		Description: do.Description,
 		CreatedBy:   do.CreatedBy,
 		UpdatedBy:   do.UpdatedBy,
-		Extra:       gptr.Indirect(do.Extra),
+		Extra:       do.Extra,
 		CreatedAt:   do.CreatedAt.Unix(),
 		UpdatedAt:   do.UpdatedAt.Unix(),
 	}

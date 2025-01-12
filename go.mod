@@ -8,10 +8,15 @@ require (
 	github.com/bytedance/gopkg v0.1.1
 	github.com/cloudwego/kitex v0.12.1
 	github.com/luci/go-render v0.0.0-20160219211803-9a04cc21af0f
-	github.com/qcq1/common v0.0.0-20250111182156-737760cd5d51
-	github.com/qcq1/rpc_miner_core v0.0.0-20250111181553-5f183cd9772b
+	github.com/qcq1/common v0.0.0-20250112054851-869cc7d6e4ca
+	github.com/qcq1/rpc_miner_core v0.0.0-20250112054317-7a6c69336b58
+	github.com/sony/sonyflake v1.2.0
 	github.com/spf13/viper v1.19.0
+	go.uber.org/dig v1.18.0
+	gorm.io/driver/mysql v1.4.4
 	gorm.io/gen v0.3.26
+	gorm.io/gorm v1.25.9
+	gorm.io/plugin/dbresolver v1.5.0
 )
 
 require (
@@ -53,7 +58,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
-	github.com/sony/sonyflake v1.2.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
@@ -65,7 +69,6 @@ require (
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	go.uber.org/dig v1.18.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/arch v0.2.0 // indirect
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
@@ -81,8 +84,5 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/datatypes v1.1.1-0.20230130040222-c43177d3cf8c // indirect
-	gorm.io/driver/mysql v1.4.4 // indirect
-	gorm.io/gorm v1.25.9 // indirect
 	gorm.io/hints v1.1.0 // indirect
-	gorm.io/plugin/dbresolver v1.5.0 // indirect
 )
