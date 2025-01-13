@@ -8,7 +8,7 @@ require (
 	github.com/bytedance/gopkg v0.1.1
 	github.com/cloudwego/kitex v0.12.1
 	github.com/luci/go-render v0.0.0-20160219211803-9a04cc21af0f
-	github.com/qcq1/common v0.0.0-20250112124459-04f0703484b1
+	github.com/qcq1/common v0.0.0-20250113160738-ebfb6234171c
 	github.com/qcq1/rpc_miner_core v0.0.0-20250112080543-67387b0a516f
 	github.com/sony/sonyflake v1.2.0
 	github.com/spf13/viper v1.19.0
