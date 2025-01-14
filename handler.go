@@ -2,17 +2,23 @@ package main
 
 import (
 	"context"
+	"miner_core/app"
+	"miner_core/sal/config"
+	"net"
+
 	"github.com/bytedance/gopkg/util/logger"
 	"github.com/cloudwego/kitex/pkg/endpoint"
+	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/pkg/utils"
 	"github.com/cloudwego/kitex/server"
+	"github.com/kitex-contrib/registry-nacos/registry"
+	"github.com/nacos-group/nacos-sdk-go/clients"
+	"github.com/nacos-group/nacos-sdk-go/common/constant"
+	"github.com/nacos-group/nacos-sdk-go/vo"
 	"github.com/qcq1/common/env"
 	"github.com/qcq1/common/render"
 	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core"
 	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core/minercore"
-	"miner_core/app"
-	"miner_core/sal/config"
-	"net"
 )
 
 type Handler struct {
@@ -41,6 +47,27 @@ func runServer(ctx context.Context, config *config.AppConfig, handler miner_core
 		}
 		options = append(options, server.WithServiceAddr(addr))
 	}
+	sc := []constant.ServerConfig{
+		*constant.NewServerConfig("wxl475.cn", 30898),
+	}
+
+	cc := constant.ClientConfig{
+		NamespaceId: "public",
+		Username:    "nacos",
+		Password:    "wxl5211314",
+	}
+
+	cli, err := clients.NewNamingClient(
+		vo.NacosClientParam{
+			ClientConfig:  &cc,
+			ServerConfigs: sc,
+		},
+	)
+	if err != nil {
+		panic(err)
+	}
+	options = append(options, server.WithRegistry(registry.NewNacosRegistry(cli)))
+	options = append(options, server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "miner_core"}))
 	svr := minercore.NewServer(handler, options...)
 	if err := svr.Run(); err != nil {
 		logger.CtxErrorf(ctx, "[Init] server run failed, err = %v", err)

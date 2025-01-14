@@ -80,3 +80,4 @@ fabric.properties
 /.idea/vcs.xml
 /.idea/dataSources.xml
 /.idea/CodeverseWorkspaceAppSettings.xml
+/log/
