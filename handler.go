@@ -36,10 +36,12 @@ func (s *Handler) QueryJobList(ctx context.Context, req *miner_core.QueryJobList
 }
 
 func runServer(ctx context.Context, config *config.AppConfig, handler miner_core.MinerCore) {
+	serverConfig := config.Server
+	nacosConfig := config.Nacos
 	options := make([]server.Option, 0)
-	options = append(options, server.WithMiddleware(LogMiddleware))
+
+	// boe 环境下指定服务地址
 	if env.IsBoe() {
-		serverConfig := config.Server
 		addr, err := net.ResolveTCPAddr(serverConfig.Network, serverConfig.HostPort)
 		if err != nil {
 			logger.CtxErrorf(ctx, "[Init] resolve tcp addr failed, err = %v", err)
@@ -47,27 +49,31 @@ func runServer(ctx context.Context, config *config.AppConfig, handler miner_core
 		}
 		options = append(options, server.WithServiceAddr(addr))
 	}
-	sc := []constant.ServerConfig{
-		*constant.NewServerConfig("wxl475.cn", 30898),
-	}
 
-	cc := constant.ClientConfig{
-		NamespaceId: "public",
-		Username:    "nacos",
-		Password:    "wxl5211314",
-	}
-
+	// 注册服务到nacos
 	cli, err := clients.NewNamingClient(
 		vo.NacosClientParam{
-			ClientConfig:  &cc,
-			ServerConfigs: sc,
+			ClientConfig: &constant.ClientConfig{
+				NamespaceId: nacosConfig.Namespace,
+				Username:    nacosConfig.Username,
+				Password:    nacosConfig.Password,
+			},
+			ServerConfigs: []constant.ServerConfig{
+				*constant.NewServerConfig(nacosConfig.Host, nacosConfig.Port),
+			},
 		},
 	)
 	if err != nil {
+		logger.CtxErrorf(ctx, "[Init] new nacos client failed, err = %v", err)
 		panic(err)
 	}
 	options = append(options, server.WithRegistry(registry.NewNacosRegistry(cli)))
-	options = append(options, server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "miner_core"}))
+	options = append(options, server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: serverConfig.Name}))
+
+	// 日志中间件
+	options = append(options, server.WithMiddleware(LogMiddleware))
+
+	// 启动服务
 	svr := minercore.NewServer(handler, options...)
 	if err := svr.Run(); err != nil {
 		logger.CtxErrorf(ctx, "[Init] server run failed, err = %v", err)
