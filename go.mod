@@ -10,7 +10,7 @@ require (
 	github.com/kitex-contrib/registry-nacos v0.1.2
 	github.com/luci/go-render v0.0.0-20160219211803-9a04cc21af0f
 	github.com/nacos-group/nacos-sdk-go v1.1.5
-	github.com/qcq1/common v0.0.0-20250115090915-813bfd19c033
+	github.com/qcq1/common v0.0.0-20250115161123-7612381b82d1
 	github.com/qcq1/rpc_miner_core v0.0.0-20250112080543-67387b0a516f
 	github.com/sony/sonyflake v1.2.0
 	github.com/spf13/viper v1.19.0

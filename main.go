@@ -2,14 +2,13 @@ package main
 
 import (
 	"context"
-	"miner_core/app"
 	"miner_core/repo"
 	"miner_core/sal/config"
 	"miner_core/sal/dao"
-	"miner_core/sal/id_generator"
 	"miner_core/service"
 
 	"github.com/bytedance/gopkg/util/logger"
+	"github.com/qcq1/common/reader"
 	"github.com/qcq1/common/render"
 	"github.com/qcq1/common/wxl_cluster"
 	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core/minercore"
@@ -35,17 +34,12 @@ func initContainer() {
 
 	// config
 	{
-		mustProvide(config.InitAppConfig)
+		mustProvide(reader.InitAppConfig[config.AppConfig])
 	}
 
 	// db
 	{
 		mustInvoke(dao.InitDB)
-	}
-
-	// id generator
-	{
-		mustProvide(id_generator.InitIDGenerator)
 	}
 
 	// dal
@@ -61,11 +55,6 @@ func initContainer() {
 	// service
 	{
 		mustProvide(service.NewJobService)
-	}
-
-	// app
-	{
-		mustProvide(app.NewApp)
 	}
 
 	// handler
