@@ -81,3 +81,4 @@ fabric.properties
 /.idea/dataSources.xml
 /.idea/CodeverseWorkspaceAppSettings.xml
 /log/
+/output/
