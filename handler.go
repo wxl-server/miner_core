@@ -75,7 +75,7 @@ func runServer(ctx context.Context, config *config.AppConfig, handler miner_core
 
 	// 启动服务
 	svr := minercore.NewServer(handler, options...)
-	if err := svr.Run(); err != nil {
+	if err = svr.Run(); err != nil {
 		logger.CtxErrorf(ctx, "[Init] server run failed, err = %v", err)
 		panic(err)
 	}
