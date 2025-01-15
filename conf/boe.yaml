@@ -1,12 +1,2 @@
-Server:
-  Name: "miner_core"
-  HostPort: "127.0.0.1:8889"
-  Network: "tcp"
-Nacos:
-  Host: "wxl475.cn"
-  Port: 30898
-  Namespace: "boe"
-  Username: "nacos"
-  Password: "wxl5211314"
 Mysql:
   Dsn: "root:wxl5211314@tcp(wxl475.cn:32130)/miner_boe?charset=utf8mb4&parseTime=True&loc=Local"

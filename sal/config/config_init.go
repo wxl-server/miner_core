@@ -10,23 +10,7 @@ import (
 )
 
 type AppConfig struct {
-	Server ServerConfig `yaml:"server"`
-	Nacos  NacosConfig  `yaml:"nacos"`
-	Mysql  MysqlConfig  `yaml:"mysql"`
-}
-
-type ServerConfig struct {
-	Name     string `yaml:"name"`
-	HostPort string `yaml:"host_port"`
-	Network  string `yaml:"network"`
-}
-
-type NacosConfig struct {
-	Host      string `yaml:"host"`
-	Port      uint64 `yaml:"port"`
-	Namespace string `yaml:"namespace"`
-	Username  string `yaml:"username"`
-	Password  string `yaml:"password"`
+	Mysql MysqlConfig `yaml:"mysql"`
 }
 
 type MysqlConfig struct {

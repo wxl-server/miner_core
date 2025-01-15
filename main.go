@@ -2,15 +2,18 @@ package main
 
 import (
 	"context"
-	"github.com/bytedance/gopkg/util/logger"
-	"github.com/qcq1/common/render"
-	"go.uber.org/dig"
 	"miner_core/app"
 	"miner_core/repo"
 	"miner_core/sal/config"
 	"miner_core/sal/dao"
 	"miner_core/sal/id_generator"
 	"miner_core/service"
+
+	"github.com/bytedance/gopkg/util/logger"
+	"github.com/qcq1/common/render"
+	"github.com/qcq1/common/wxl_cluster"
+	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core/minercore"
+	"go.uber.org/dig"
 )
 
 var (
@@ -21,7 +24,7 @@ var (
 func main() {
 	initContainer()
 
-	mustInvoke(runServer)
+	wxl_cluster.NewServer(minercore.NewServer, handler, "miner_core", 8889)
 }
 
 func initContainer() {
@@ -67,19 +70,19 @@ func initContainer() {
 
 	// handler
 	{
-		mustProvide(NewHandler)
+		mustInvoke(NewHandler)
 	}
 }
 
 func mustProvide(constructor interface{}, opts ...dig.ProvideOption) {
-	if err := container.Provide(constructor); err != nil {
+	if err := container.Provide(constructor, opts...); err != nil {
 		logger.Errorf("container provide failed, err = %v, constructor = %v", err, render.Render(constructor))
 		panic(err)
 	}
 }
 
 func mustInvoke(function interface{}, opts ...dig.InvokeOption) {
-	if err := container.Invoke(function); err != nil {
+	if err := container.Invoke(function, opts...); err != nil {
 		logger.Errorf("container invoke failed, err = %v, function = %v", err, render.Render(function))
 		panic(err)
 	}
