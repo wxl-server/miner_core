@@ -6,7 +6,7 @@ replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 
 require (
 	github.com/bytedance/gopkg v0.1.1
-	github.com/qcq1/common v0.0.0-20250115161123-7612381b82d1
+	github.com/qcq1/common v0.0.0-20250116114415-0de2ea738059
 	github.com/qcq1/rpc_miner_core v0.0.0-20250115174444-0c16df0849dc
 	go.uber.org/dig v1.18.0
 	gorm.io/driver/mysql v1.4.4
