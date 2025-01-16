@@ -2,11 +2,12 @@ package service
 
 import (
 	"context"
-	"github.com/bytedance/gopkg/util/logger"
-	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core"
-	"go.uber.org/dig"
 	"miner_core/domain/converter"
 	"miner_core/repo"
+
+	"github.com/bytedance/gopkg/util/logger"
+	"github.com/qcq1/idl_gen/kitex_gen/miner_core"
+	"go.uber.org/dig"
 )
 
 type JobService interface {

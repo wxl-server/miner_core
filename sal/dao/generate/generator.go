@@ -1,14 +1,15 @@
 package main
 
 import (
+	"miner_core/sal/dao/generate/model"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gen"
 	"gorm.io/gorm"
-	"miner_core/sal/dao/generate/model"
 )
 
 func main() {
-	//modelGenerator()
+	modelGenerator()
 	queryGenerator()
 }
 

@@ -219,6 +219,8 @@ github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=
 github.com/qcq1/common v0.0.0-20250115161123-7612381b82d1 h1:Wz3KCUoqlkh7dyUzFO44xOqRm8aRyZ0qKAAi8jmoe7I=
 github.com/qcq1/common v0.0.0-20250115161123-7612381b82d1/go.mod h1:2JhGx+iUvGArT1yvB4ucjGFhhz976Lh66QbQe+wnJg0=
+github.com/qcq1/idl_gen v0.0.0-20250116104951-ff9b7f7e0052 h1:A9rETgOmp6n1YgHM5Qou/BkYXdr/xa0aa6ggf5muAfs=
+github.com/qcq1/idl_gen v0.0.0-20250116104951-ff9b7f7e0052/go.mod h1:ikI/UCXvGrbp3ssJX7cKOKSJ26klEDwtJEyqF+wWFgA=
 github.com/qcq1/rpc_miner_core v0.0.0-20250115174444-0c16df0849dc h1:PsQtX0M/UiT5jVITauZ+HcMdDd65wG0RDZbdzMThPPA=
 github.com/qcq1/rpc_miner_core v0.0.0-20250115174444-0c16df0849dc/go.mod h1:M9pc/HySgPm6ZOWQJskh6nc0du3En7IMUtQC6t0QOvU=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=

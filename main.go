@@ -11,7 +11,7 @@ import (
 	"github.com/qcq1/common/reader"
 	"github.com/qcq1/common/render"
 	"github.com/qcq1/common/wxl_cluster"
-	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core/minercore"
+	"github.com/qcq1/idl_gen/kitex_gen/miner_core/minercore"
 	"go.uber.org/dig"
 )
 

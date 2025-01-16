@@ -1,14 +1,15 @@
 package converter
 
 import (
-	"github.com/qcq1/common/choose"
-	"github.com/qcq1/common/gptr"
-	"github.com/qcq1/rpc_miner_core/kitex_gen/miner_core"
 	"miner_core/domain"
 	"miner_core/sal/dao/generate/model"
 	"miner_core/sal/dao/where"
 	"strings"
 	"time"
+
+	"github.com/qcq1/common/choose"
+	"github.com/qcq1/common/gptr"
+	"github.com/qcq1/idl_gen/kitex_gen/miner_core"
 )
 
 func BuildQueryJobListReq(dto *miner_core.QueryJobListReq) *domain.QueryJobListReqDO {
