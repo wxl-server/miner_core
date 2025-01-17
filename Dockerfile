@@ -3,7 +3,7 @@ LABEL authors="wxl"
 EXPOSE 8888
 
 # 设置工作目录
-WORKDIR /miner_core
+WORKDIR /app
 
 # 复制 go.mod 和 go.sum 文件
 COPY go.mod go.sum ./
@@ -18,4 +18,4 @@ COPY . .
 RUN sh build.sh
 
 # 设置容器启动时运行的命令
-CMD ["sh", "/miner_core/output/bootstrap.sh"]
+CMD ["sh", "/app/output/bootstrap.sh"]
