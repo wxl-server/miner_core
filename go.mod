@@ -6,8 +6,7 @@ replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 
 require (
 	github.com/bytedance/gopkg v0.1.1
-	github.com/qcq1/common v0.0.0-20250116114415-0de2ea738059
-	github.com/qcq1/rpc_miner_core v0.0.0-20250115174444-0c16df0849dc
+	github.com/wxl-server/common v0.0.0-20250117062117-5a3e73943268
 	go.uber.org/dig v1.18.0
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/gen v0.3.26
@@ -74,6 +73,7 @@ require (
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
+	github.com/wxl-server/idl_gen v0.0.0-20250117062142-9338f1dcad38 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect

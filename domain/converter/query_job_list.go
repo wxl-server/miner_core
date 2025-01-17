@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/qcq1/common/choose"
-	"github.com/qcq1/common/gptr"
 	"github.com/qcq1/idl_gen/kitex_gen/miner_core"
+	"github.com/wxl-server/common/choose"
+	"github.com/wxl-server/common/gptr"
 )
 
 func BuildQueryJobListReq(dto *miner_core.QueryJobListReq) *domain.QueryJobListReqDO {

@@ -8,10 +8,10 @@ import (
 	"miner_core/service"
 
 	"github.com/bytedance/gopkg/util/logger"
-	"github.com/qcq1/common/reader"
-	"github.com/qcq1/common/render"
-	"github.com/qcq1/common/wxl_cluster"
 	"github.com/qcq1/idl_gen/kitex_gen/miner_core/minercore"
+	"github.com/wxl-server/common/reader"
+	"github.com/wxl-server/common/render"
+	"github.com/wxl-server/common/wxl_cluster"
 	"go.uber.org/dig"
 )
 
