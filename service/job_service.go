@@ -6,7 +6,7 @@ import (
 	"miner_core/repo"
 
 	"github.com/bytedance/gopkg/util/logger"
-	"github.com/qcq1/idl_gen/kitex_gen/miner_core"
+	"github.com/wxl-server/idl_gen/kitex_gen/miner_core"
 	"go.uber.org/dig"
 )
 
