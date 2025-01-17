@@ -2,8 +2,6 @@ module miner_core
 
 go 1.23
 
-toolchain go1.23.0
-
 replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 
 require (
