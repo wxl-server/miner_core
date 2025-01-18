@@ -2,7 +2,7 @@ package converter
 
 import (
 	"miner_core/domain"
-	"miner_core/sal/dao/generate/model"
+	"miner_core/sal/dao/generator/model"
 	"miner_core/sal/dao/where"
 	"strings"
 	"time"

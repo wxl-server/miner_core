@@ -5,7 +5,7 @@ import (
 	"github.com/bytedance/gopkg/util/logger"
 	"github.com/wxl-server/common/gptr"
 	"miner_core/common/constants"
-	query2 "miner_core/sal/dao/generate/query"
+	query2 "miner_core/sal/dao/generator/query"
 	"time"
 )
 

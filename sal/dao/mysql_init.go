@@ -6,7 +6,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"miner_core/sal/config"
-	"miner_core/sal/dao/generate/query"
+	"miner_core/sal/dao/generator/query"
 )
 
 func InitDB(ctx context.Context, config *config.AppConfig) {

@@ -3,7 +3,7 @@ package dao
 import (
 	"context"
 	"github.com/bytedance/gopkg/util/logger"
-	"miner_core/sal/dao/generate/model"
+	"miner_core/sal/dao/generator/model"
 	"miner_core/sal/dao/where"
 )
 
