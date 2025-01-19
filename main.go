@@ -42,11 +42,6 @@ func initContainer() {
 		mustInvoke(dao.InitDB)
 	}
 
-	// dal
-	{
-		mustProvide(dao.NewJobDal)
-	}
-
 	// repo
 	{
 		mustProvide(repo.NewJobRepo)

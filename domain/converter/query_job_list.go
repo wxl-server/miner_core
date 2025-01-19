@@ -3,7 +3,6 @@ package converter
 import (
 	"miner_core/domain"
 	"miner_core/sal/dao/generator/model"
-	"miner_core/sal/dao/where"
 	"strings"
 	"time"
 
@@ -28,18 +27,6 @@ func BuildQueryJobListReq(dto *miner_core.QueryJobListReq) *domain.QueryJobListR
 		do.Order = gptr.Of(strings.ToLower(dto.Order.String()))
 	}
 	return do
-}
-
-func BuildJobWhereOpt(do *domain.QueryJobListReqDO) *where.JobWhereOpt {
-	return &where.JobWhereOpt{
-		PageNum:        do.PageNum,
-		PageSize:       do.PageSize,
-		OrderBy:        do.OrderBy,
-		Order:          do.Order,
-		ID:             do.ID,
-		CreatedBy:      do.CreatedBy,
-		CreatedAtStart: do.CreatedAtStart,
-	}
 }
 
 func JobPOs2DOs(pos []*model.JobPO) (dos []domain.JobDO) {
