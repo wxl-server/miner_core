@@ -1,7 +1,7 @@
 package main
 
 import (
-	"miner_core/sal/dao/generate/model"
+	"miner_core/sal/dao/generator/model"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gen"
