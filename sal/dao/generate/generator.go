@@ -16,7 +16,7 @@ func main() {
 func modelGenerator() {
 	g := gen.NewGenerator(gen.Config{
 		FieldNullable: true,
-		OutPath:       "./sal/dao/generator/model",
+		OutPath:       "./sal/dao/generate/model",
 		Mode:          gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
 	})
 
@@ -24,6 +24,7 @@ func modelGenerator() {
 	g.UseDB(db)
 
 	g.GenerateModelAs("jobs", "JobPO", gen.FieldGenType("deleted_at", "gorm.DeletedAt"))
+	g.GenerateModelAs("users", "UserPO", gen.FieldGenType("deleted_at", "gorm.DeletedAt"))
 
 	g.Execute()
 }
@@ -31,7 +32,7 @@ func modelGenerator() {
 func queryGenerator() {
 	g := gen.NewGenerator(gen.Config{
 		FieldNullable: true,
-		OutPath:       "./sal/dao/generator/query",
+		OutPath:       "./sal/dao/generate/query",
 		Mode:          gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
 	})
 
@@ -39,6 +40,7 @@ func queryGenerator() {
 	g.UseDB(db)
 
 	g.ApplyBasic(model.JobPO{})
+	g.ApplyBasic(model.UserPO{})
 
 	g.Execute()
 }

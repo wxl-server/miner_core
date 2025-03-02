@@ -42,19 +42,18 @@ func initContainer() {
 		mustInvoke(dao.InitDB)
 	}
 
-	// dal
-	{
-		mustProvide(dao.NewJobDal)
-	}
-
 	// repo
 	{
 		mustProvide(repo.NewJobRepo)
+		mustProvide(repo.NewUserRepo)
 	}
 
 	// service
 	{
 		mustProvide(service.NewJobService)
+		mustProvide(service.NewUserService)
+		mustProvide(service.NewIndicatorService)
+		mustProvide(service.NewTaskService)
 	}
 
 	// handler

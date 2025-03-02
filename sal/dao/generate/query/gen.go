@@ -16,34 +16,39 @@ import (
 )
 
 var (
-	Q     = new(Query)
-	JobPO *jobPO
+	Q      = new(Query)
+	JobPO  *jobPO
+	UserPO *userPO
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	JobPO = &Q.JobPO
+	UserPO = &Q.UserPO
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:    db,
-		JobPO: newJobPO(db, opts...),
+		db:     db,
+		JobPO:  newJobPO(db, opts...),
+		UserPO: newUserPO(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	JobPO jobPO
+	JobPO  jobPO
+	UserPO userPO
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:    db,
-		JobPO: q.JobPO.clone(db),
+		db:     db,
+		JobPO:  q.JobPO.clone(db),
+		UserPO: q.UserPO.clone(db),
 	}
 }
 
@@ -57,18 +62,21 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:    db,
-		JobPO: q.JobPO.replaceDB(db),
+		db:     db,
+		JobPO:  q.JobPO.replaceDB(db),
+		UserPO: q.UserPO.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	JobPO IJobPODo
+	JobPO  IJobPODo
+	UserPO IUserPODo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		JobPO: q.JobPO.WithContext(ctx),
+		JobPO:  q.JobPO.WithContext(ctx),
+		UserPO: q.UserPO.WithContext(ctx),
 	}
 }
 

@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"miner_core/common/constants"
+	"miner_core/common/consts"
 	"time"
 )
 
@@ -20,9 +20,10 @@ type QueryJobListReqDO struct {
 	PageNum  int64
 	PageSize int64
 	OrderBy  *string
-	Order    *constants.Order
+	Order    *consts.Order
 
 	ID             *int64
+	Name           *string
 	CreatedBy      *int64
 	CreatedAtStart *time.Time
 	CreatedAtEnd   *time.Time

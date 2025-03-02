@@ -3,7 +3,6 @@ package converter
 import (
 	"miner_core/domain"
 	"miner_core/sal/dao/generate/model"
-	"miner_core/sal/dao/where"
 	"strings"
 	"time"
 
@@ -17,29 +16,18 @@ func BuildQueryJobListReq(dto *miner_core.QueryJobListReq) *domain.QueryJobListR
 		PageNum:        dto.PageNum,
 		PageSize:       dto.PageSize,
 		ID:             dto.Id,
+		Name:           dto.Name,
 		CreatedBy:      dto.CreatedBy,
 		CreatedAtStart: choose.If(dto.CreatedAtStart == nil, nil, gptr.Of(time.Unix(gptr.Indirect(dto.CreatedAtStart), 0))),
 		CreatedAtEnd:   choose.If(dto.CreatedAtEnd == nil, nil, gptr.Of(time.Unix(gptr.Indirect(dto.CreatedAtEnd), 0))),
 	}
-	if dto.OrderBy != nil {
+	if dto.OrderBy != nil && gptr.Indirect(dto.OrderBy) != -1 {
 		do.OrderBy = gptr.Of(strings.ToLower(dto.OrderBy.String()))
 	}
-	if dto.Order != nil {
+	if dto.Order != nil && gptr.Indirect(dto.Order) != -1 {
 		do.Order = gptr.Of(strings.ToLower(dto.Order.String()))
 	}
 	return do
-}
-
-func BuildJobWhereOpt(do *domain.QueryJobListReqDO) *where.JobWhereOpt {
-	return &where.JobWhereOpt{
-		PageNum:        do.PageNum,
-		PageSize:       do.PageSize,
-		OrderBy:        do.OrderBy,
-		Order:          do.Order,
-		ID:             do.ID,
-		CreatedBy:      do.CreatedBy,
-		CreatedAtStart: do.CreatedAtStart,
-	}
 }
 
 func JobPOs2DOs(pos []*model.JobPO) (dos []domain.JobDO) {
@@ -63,23 +51,29 @@ func JobPO2DO(po *model.JobPO) domain.JobDO {
 	}
 }
 
-func JobDOs2DTOs(dos []domain.JobDO) (dtos []*miner_core.Job) {
+func JobDOs2DTOs(dos []domain.JobDO, userIDs2DO map[int64]domain.UserDO) (dtos []*miner_core.Job) {
 	dtos = make([]*miner_core.Job, 0, len(dos))
 	for do := range dos {
-		dtos = append(dtos, JobDO2DTO(dos[do]))
+		dtos = append(dtos, JobDO2DTO(dos[do], userIDs2DO[dos[do].CreatedBy], userIDs2DO[dos[do].UpdatedBy]))
 	}
 	return dtos
 }
 
-func JobDO2DTO(do domain.JobDO) *miner_core.Job {
+func JobDO2DTO(do domain.JobDO, creator domain.UserDO, updater domain.UserDO) *miner_core.Job {
 	return &miner_core.Job{
 		Id:          do.ID,
 		Name:        do.Name,
 		Description: do.Description,
-		CreatedBy:   do.CreatedBy,
-		UpdatedBy:   do.UpdatedBy,
-		Extra:       do.Extra,
-		CreatedAt:   do.CreatedAt.Unix(),
-		UpdatedAt:   do.UpdatedAt.Unix(),
+		CreatedBy: &miner_core.User{
+			Id:    do.CreatedBy,
+			Email: creator.Email,
+		},
+		UpdatedBy: &miner_core.User{
+			Id:    do.UpdatedBy,
+			Email: updater.Email,
+		},
+		Extra:     do.Extra,
+		CreatedAt: do.CreatedAt.Unix(),
+		UpdatedAt: do.UpdatedAt.Unix(),
 	}
 }
