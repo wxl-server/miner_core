@@ -2,11 +2,12 @@ package dao
 
 import (
 	"context"
+	"miner_core/sal/config"
+	"miner_core/sal/dao/generate/query"
+
 	"github.com/bytedance/gopkg/util/logger"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"miner_core/sal/config"
-	"miner_core/sal/dao/generator/query"
 )
 
 func InitDB(ctx context.Context, config *config.AppConfig) {

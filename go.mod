@@ -8,6 +8,7 @@ require (
 	github.com/bytedance/gopkg v0.1.1
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/wxl-server/common v0.0.0-20250302063359-5b435768d117
+	github.com/wxl-server/idl_gen v0.0.0-20250302125547-e01d1de170ca
 	go.uber.org/dig v1.18.0
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/gen v0.3.26
@@ -74,7 +75,6 @@ require (
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
-	github.com/wxl-server/idl_gen v0.0.0-20250302125547-e01d1de170ca // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
